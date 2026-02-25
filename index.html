@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.7.33">
 
   <meta name="author" content=" Lesley Chapman Hannah, Ph.D., M.S. College of Graduate Studies Northeast Ohio Medical University">
-  <title>Population Inference and Foundations of Probability</title>
+  <title>Probability in Biomedical Data Science</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -195,7 +195,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h2 style="color: #2A76DD;" class="title">Population Inference and Foundations of Probability</h2>
+  <h2 style="color: #2A76DD;" class="title">Probability in Biomedical Data Science</h2>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -206,426 +206,571 @@
 </div>
 
 </section>
-<section class="slide level2">
-
-<h3 id="introduction">Introduction</h3>
+<section id="from-sampling-to-probability" class="slide level2">
+<h2>From Sampling to Probability</h2>
 <div style="font-size:0.7em">
-<p>In biomedical and clinical science, knowledge and insights emerge from laboratory experiments, clinical trials, population studies, or genomic databases, the conclusions we draw are anchored in observed data</p>
+<p>In the previous lecture, we introduced four statistical concepts:</p>
 <ul>
-<li>the data often require interpretation:
-<ul>
-<li>determining whether a treatment effect is meaningful</li>
-<li>whether a biomarker signal is reproducible</li>
-<li>whether a genomic variant is rare or common</li>
-<li>whether an observed association reflects biology rather than study design</li>
-</ul></li>
-<li>statistics provides the framework for this interpretation and allows researchers to understand, evaluate, and generate biomedical evidence in a systematic way</li>
-</ul>
-</div>
-</section>
-<section class="slide level2">
-
-<h3 id="statistics-and-scientific-literature">Statistics and Scientific Literature</h3>
-<div style="font-size:0.7em">
-<p>In scientific literature [i.e.: Science, Cell, Nature] readers often encounter metrics such as:</p>
-<pre><code>effect sizes, risk ratios, regression coefficients, confidence intervals, survival curves</code></pre>
-<ul>
-<li><p>metrics that express strength of evidence between associations and uncertainty</p></li>
-<li><p>statistics in biomedicine provide the tools for distinguishing meaningful biological signals from background variation</p></li>
-</ul>
-</div>
-</section>
-<section class="slide level2">
-
-<h3 id="statistics-and-clincial-science">Statistics and Clincial Science</h3>
-<div style="font-size:0.7em">
-<ul>
-<li>study design decisions shape the type and strength of evidence produced</li>
-<li>Example study design decisions:
-<ul>
-<li>cohort selection</li>
-<li>measurement strategies</li>
-<li>analytical approaches</li>
-</ul></li>
-<li>statistical frameworks guide these decisions by clarifying how data can support specific scientific questions and how uncertainty will be quantified</li>
-<li>designing a clinical trial involves anticipating variability and determining sample size requirements</li>
-<li>designing a biomarker study involves assessing measurement reliability and effect magnitude</li>
-<li>statistical approaches help define these choices</li>
-</ul>
-</div>
-</section>
-<section class="slide level2">
-
-<h3 id="statistics-and-biomedical-science">Statistics and Biomedical Science</h3>
-<div style="font-size:0.7em">
-<p>Biomedical research often begins with a question that invovles determining:</p>
-<blockquote>
-<p>What does our select dataset tell us about a broader population?</p>
-</blockquote>
-<p>Scientific task generates numbers and our goal is to interpret those numbers as evidence</p>
-<p>Approach for analysis would involve describing:</p>
-<ul>
-<li>the scientific target of interest<br>
+<li><strong>population</strong> — the complete set of units or outcomes of interest<br>
 </li>
-<li>the observed data used as evidence<br>
+<li><strong>sample</strong> — the observed subset drawn from the population<br>
 </li>
-<li>the quantity the analysis aims to estimate<br>
+<li><strong>parameter</strong> — a numerical characteristic of the population<br>
 </li>
-<li>the uncertainty that accompanies any conclusion</li>
+<li><strong>statistic</strong> — a numerical summary computed from the sample</li>
 </ul>
-<p>Next, we introduce the core terms that help define statistical reasoning in biomedical science</p>
-</div>
-</section>
-<section class="slide level2">
-
-<h3 id="core-statistical-definitions">Core Statistical Definitions</h3>
-<div style="font-size:0.7em">
+<p>Probability provides the framework that explains:</p>
 <ul>
-<li><p>define terms within the basic framework for statistical inference, regression modeling, and biomedical decision-making</p></li>
-<li><p>terms include:</p>
-<ul>
-<li>population</li>
-<li>sample</li>
-<li>parameter</li>
-<li>statistic</li>
-</ul></li>
+<li>why samples vary<br>
+</li>
+<li>how statistics fluctuate across repeated samples<br>
+</li>
+<li>how parameters can be inferred from observed data</li>
 </ul>
 </div>
 </section>
-<section class="slide level2">
-
-<h3 id="core-statistical-definitions-1">Core Statistical Definitions</h3>
+<section id="biomedical-data-analysis-and-probability" class="slide level2">
+<h2>Biomedical Data Analysis and Probability</h2>
 <div style="font-size:0.7em">
+<p>Biomedical systems exhibit inherent variability:</p>
 <ul>
-<li><p>define terms within the basic framework for statistical inference, regression modeling, and biomedical decision-making</p></li>
-<li><p><strong>population</strong>: complete set of biological units, measurements, or possible outcomes relevant to a scientific question</p></li>
-<li><p>population is often entirely unobservable</p></li>
+<li><p>patients differ biologically and environmentally<br>
+</p></li>
+<li><p>measurements contain technical variation<br>
+</p></li>
+<li><p>disease processes evolve stochastically</p></li>
+<li><p>probability is a framework that can be used to describe this variability</p></li>
+<li><p>biomedical data analysis often begins by specifying probabilistic models for outcomes</p></li>
 </ul>
-<p><strong>Examples</strong></p>
+<p>Probability models allow researchers to:</p>
 <ul>
-<li><p>all patients with pancreatic cancer in the United States</p></li>
-<li><p>all circulating tumor cells in a single patient’s bloodstream</p></li>
-<li><p>all potential gene expression profiles under a defined biological condition</p></li>
-<li><p>statistical test exist because we cannot measure every unit in the population; instead, we draw inferences from samples</p></li>
+<li>represent uncertainty</li>
+<li>describe how data arise<br>
+</li>
+<li>quantify expected variability across individuals</li>
 </ul>
 </div>
 </section>
-<section class="slide level2">
-
-<h3 id="sample-observable-subset-of-the-population">Sample: Observable Subset of the Population</h3>
+<section id="probability-defnition" class="slide level2">
+<h2>Probability: Defnition</h2>
 <div style="font-size:0.7em">
-<p><strong>Sample</strong></p>
 <ul>
-<li>subset of the population that we actually observe and measure</li>
-<li>sample: <strong>data available for analysis</strong></li>
-<li>statistical conclusions originate from this subset</li>
+<li><p>a measure of how likely an event is to occur<br>
+</p></li>
+<li><p>interpreted through long-run relative frequency under repeated trials</p></li>
+<li><p>the mathematical representation of uncertainty in data-generating processes</p></li>
 </ul>
-<p>Statistical inference answers:</p>
-<blockquote>
-<p>What does this sample tell us about the population?</p>
-</blockquote>
+<p>Formally:</p>
+<p><span class="math display">\[
+0 \le P(A) \le 1
+\]</span></p>
+<p>Probability assigns a numerical measure to uncertainty about an event, where:</p>
+<ul>
+<li>0 : the event does not occur<br>
+</li>
+<li>1 : the event will occur with some degree of certainty<br>
+</li>
+<li>intermediate values quantify uncertainty<br>
+</li>
+<li>values between 0 and 1 quantify the degree of uncertainty</li>
+</ul>
+<p>Biomedical examples:</p>
+<ul>
+<li>Probability a patient responds to treatment</li>
+<li>Probability a variant is observed in a population</li>
+<li>Probability of disease occurrence</li>
+</ul>
+</div>
+</section>
+<section id="probability-and-parameters" class="slide level2">
+<h2>Probability and Parameters</h2>
+<div style="font-size:0.7em">
+<p>Population parameters often represent probabilities</p>
 <p>Examples:</p>
 <ul>
-<li>200 patients enrolled in a clinical trial</li>
-<li>50 tumor biopsies selected for sequencing</li>
-<li>10,000 cells measured in single‑cell RNA‑seq</li>
+<li>mutation prevalence in a population<br>
+</li>
+<li>treatment response probability<br>
+</li>
+<li>disease incidence risk</li>
+</ul>
+<p>Parameters describe the population probability distribution</p>
+<p>Because parameters are unobserved:</p>
+<ul>
+<li>samples are collected<br>
+</li>
+<li>statistics are computed<br>
+</li>
+<li>probability explains variability</li>
+</ul>
+</div>
+</section>
+<section id="probability-and-statistics" class="slide level2">
+<h2>Probability and Statistics</h2>
+<div style="font-size:0.7em">
+<p>The relationship between probability and statistics can be summarized as:</p>
+<ul>
+<li><strong>probability</strong> — describes population behavior and data generation<br>
+</li>
+<li><strong>statistics</strong> — uses samples to learn about probability structure</li>
+</ul>
+<p>Conceptually:</p>
+<p><span class="math display">\[
+\text{Probability} \rightarrow \text{Sampling variability} \rightarrow \text{Statistical inference}
+\]</span></p>
+<p>Probabiliy and statistics are linked to the following:</p>
+<ul>
+<li>sampling variability arises from probabilistic selection</li>
+<li>models assume outcomes follow probability distributions<br>
+</li>
+<li>workflow begins with specifying outcome distribution</li>
+</ul>
+</div>
+</section>
+<section id="probability-in-biomedicine" class="slide level2">
+<h2>Probability in Biomedicine</h2>
+<p>Biological systems are variable</p>
+<p>Even under identical conditions:</p>
+<ul>
+<li>Patients respond differently to treatment<br>
+</li>
+<li>Cells express genes differently<br>
+</li>
+<li>Disease progression varies</li>
+</ul>
+<p>Probability provides a framework to model this variability</p>
+</section>
+<section class="slide level2">
+
+<h3 id="transition-to-formal-probability-concepts">Transition to Formal Probability Concepts</h3>
+<div style="font-size:0.7em">
+<p>Having established probability as the mechanism linking population and sample, we now introduce formal components of probability models:</p>
+<ul>
+<li>events and probability assignments<br>
+</li>
+<li>random variables<br>
+</li>
+<li>probability distributions<br>
+</li>
+<li>discrete and continuous outcome structures</li>
+</ul>
+<p>These objects allow biological uncertainty to be expressed mathematically and estimated from data.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="random-variables-connecting-outcomes-to-numbers">Random Variables: Connecting Outcomes to Numbers</h3>
+<div style="font-size:0.7em">
+<p><strong>random variable</strong>:</p>
+<ul>
+<li>assigns a numerical value to the outcome of a random process</li>
+<li>repreent biological outcomes or values in the form of analyzable quantities</li>
+<li>numerical representation of an outcome whose value is determined by a probabilistic process</li>
+</ul>
+</div>
+</section>
+<section id="random-variables-representing-biomedical-outcomes" class="slide level2">
+<h2>Random Variables: Representing Biomedical Outcomes</h2>
+<div style="font-size:0.7em">
+<ul>
+<li><p>random variables assign numerical values to outcomes generated by probabilistic processes</p></li>
+<li><p>random variables define the outcome layer of statistical models and serve as the objects whose distributions are studied.</p></li>
+</ul>
+<p>Examples:</p>
+<ul>
+<li>mutation presence indicator<br>
+</li>
+<li>treatment response category<br>
+</li>
+<li>biomarker measurement value<br>
+</li>
+<li>survival time</li>
 </ul>
 </div>
 </section>
 <section class="slide level2">
 
-<h3 id="random-sampling-and-statistical-inference">Random Sampling and Statistical Inference</h3>
+<h3 id="random-variable-types-in-biomedicine">Random variable types in biomedicine</h3>
+<p>Binary outcome:</p>
+<p><span class="math display">\[
+Y =
+\begin{cases}
+1 &amp; \text{mutation present}\\
+0 &amp; \text{mutation absent}
+\end{cases}
+\]</span></p>
+<p>Categorical outcome:</p>
+<p><span class="math display">\[
+Y \in \{\text{CR}, \text{PR}, \text{NR}\}
+\]</span></p>
+<p>Continuous outcome:</p>
+<p><span class="math display">\[
+Y = \text{tumor size}
+\]</span></p>
+</section>
+<section class="slide level2">
+
+<h3 id="binary-random-variables">Binary random variables</h3>
+<p>Binary outcomes often represent presence/absence decisions</p>
+<p>Examples:</p>
+<ul>
+<li>pathogenic variant present vs absent</li>
+<li>treatment response (yes/no)</li>
+<li>adverse event (yes/no)</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="code-example-simulate-a-binary-mutation-indicator">Code example: simulate a binary mutation indicator</h3>
 <div style="font-size:0.7em">
+<p><strong>Biomedical question</strong></p>
+<p>What proportion of patients in a population carry a pathogenic mutation in a gene of interest?</p>
+<p><strong>Population perspective</strong></p>
 <ul>
-<li>random sampling: a data collection process in which each unit in the target population has a known, non-zero probability of selection determined by chance rather than investigator choice</li>
+<li>each patient either carries the mutation (1) or does not (0)<br>
+</li>
+<li>the population mutation prevalence is an unknown probability parameter (p)<br>
+</li>
+<li>this setting is naturally modeled with a <strong>Bernoulli distribution</strong></li>
 </ul>
-<p>Random sampling helps ensure:</p>
+<p>Thus, for patient (i):</p>
+<p><span class="math display">\[
+Y_i \sim \text{Bernoulli}(p)
+\]</span></p>
+<p><strong>Sampling and estimation</strong></p>
 <ul>
-<li>absence of systematic selection bias</li>
-<li>representation of population heterogeneity</li>
-<li>quantifiable sampling uncertainty</li>
-<li>validity of probability-based inference</li>
-</ul>
-<p>Consequence of non-random sampling</p>
-<ul>
-<li>estimates may be biased</li>
-<li>variability cannot be quantified correctly</li>
-<li>population inference may be invalid</li>
+<li>a study observes (n) patients drawn from this population<br>
+</li>
+<li>each observation is a Bernoulli trial<br>
+</li>
+<li>the sample proportion estimates the population mutation probability</li>
 </ul>
 </div>
 </section>
 <section class="slide level2">
 
-<h3 id="sampling-variability-and-behavior-of-sample-statistics">Sampling Variability and Behavior of Sample Statistics</h3>
-<div style="font-size:0.7em">
-<p><strong>Sampling variability</strong>: - inherent variation in a statistic across repeated random samples from the same population - observable consequence of random sampling and represents the distribution of possible estimates that could have been obtained under repeated data collection</p>
+<h3 id="code-example-binary-mutation-indicator">Code example: Binary Mutation Indicator</h3>
+<div style="font-size:0.6em">
+<p>Explanation:</p>
 <ul>
-<li><p>sampling variability is linked to:</p>
-<ul>
-<li>confidence intervals <span class="math inline">\(\rightarrow\)</span> quantifying estimation uncertainty</li>
-<li>hypothesis testing <span class="math inline">\(\rightarrow\)</span> assessing compatibility with models</li>
-<li>regression inference <span class="math inline">\(\rightarrow\)</span> evaluating parameter uncertainty</li>
-</ul></li>
-</ul>
-</div>
-</section>
-<section class="slide level2">
-
-<h3 id="statistics-and-variation-across-samples">Statistics and Variation Across Samples</h3>
-<div style="font-size:0.7em">
-<ul>
-<li><p><strong>sampling variability</strong>: variation in a statistic across repeated samples drawn from the same population</p></li>
-<li><p>value reflects the randomness inherent in sampling rather than true differences in the underlying population</p></li>
-<li><p><strong>scenario</strong>: repeat a study and collect a new sample</p></li>
-<li><p><strong>outcome</strong>: obtain a different statistic</p></li>
+<li><code>rbinom(n, 1, p)</code> generates (n) independent Bernoulli outcomes<br>
+</li>
+<li>mimics sampling patients from the population distribution</li>
+<li>each simulated patient outcome represents a draw from the population distribution, and the sample proportion summarizes these draws to estimate the population probability</li>
 </ul>
 <p>Example:</p>
-<p>Study 1: response rate = 42%<br>
-Study 2: response rate = 47%</p>
-</div>
-</section>
-<section class="slide level2">
-
-<h3 id="statistical-inference-requires-sampling">Statistical Inference Requires Sampling</h3>
-<div style="font-size:0.7em">
-<p>Measuring the entire population is typically impossible due to: - Cost - Time - Ethical constraints - Biological feasibility</p>
-<p>Examples:</p>
 <ul>
-<li><p>Cannot sequence every cancer cell in a tumor</p></li>
-<li><p>Cannot enroll every patient in a clinical trial</p></li>
-<li><p>Cannot observe every biological realization</p></li>
-<li><p>sampling makes statistical inference feasible</p></li>
-</ul>
-</div>
-</section>
-<section class="slide level2">
-
-<h3 id="parameter-linking-population-to-sample">Parameter: Linking Population to Sample</h3>
-<div style="font-size:0.7em">
-<p><strong>Parameter</strong>: fixed but unknown numerical characteristic of the population</p>
-<p><strong>Examples</strong>:</p>
-<ul>
-<li>True cancer prevalence rate</li>
-<li>True mean gene expression level</li>
-<li>True treatment response probability</li>
-</ul>
-<p><strong>Nomenclature examples</strong>:</p>
-<p><span class="math display">\[
-\mu, \; \sigma, \; p, \; \beta
-\]</span></p>
-</div>
-</section>
-<section class="slide level2">
-
-<h3 id="statistic-observable-estimate-of-the-parameter">Statistic: Observable Estimate of the Parameter</h3>
-<div style="font-size:0.7em">
-<ul>
-<li><p><strong>statistic</strong>: computed from the sample and used to estimate the parameter</p></li>
-<li><p><em>statistics</em>: random variables because they depend on the sampled data</p></li>
-</ul>
-<p><strong>Examples</strong>:</p>
-<ul>
-<li>Sample mean: <span class="math inline">\(\bar{x}\)</span> estimates population mean <span class="math inline">\(\mu\)</span></li>
-<li>Sample proportion: <span class="math inline">\(\hat{p}\)</span> estimates population proportion <span class="math inline">\(p\)</span></li>
-<li>Regression coefficients estimate population relationships</li>
-</ul>
-</div>
-</section>
-<section class="slide level2">
-
-<h3 id="definition-statistic">Definition: Statistic</h3>
-<div style="font-size:0.7em">
-<ul>
-<li><p><strong>statistic</strong>: numerical summary computed from a sample</p></li>
-<li><p>a statistic describes what we observed in the data</p></li>
-</ul>
-<p>Examples:</p>
-<ul>
-<li><p>Sample mean age of patients: 63.4 years<br>
-</p></li>
-<li><p>Sample response rate: 42%<br>
-</p></li>
-<li><p>Observed allele frequency in gnomAD: 0.003</p></li>
-<li><p>Note: these numbers summarize the sample — not the entire population</p></li>
-</ul>
-</div>
-</section>
-<section class="slide level2">
-
-<h3 id="statistic-vs-parameter">Statistic vs Parameter</h3>
-<div style="font-size:0.7em">
-<p><strong>parameter</strong>:</p>
-<ul>
-<li>fixed numerical characteristic of the entire population</li>
-<li>value does not change</li>
-<li>value typically cannot observed directly</li>
-</ul>
-<p>Example: true mean gene expression under a condition <span class="math inline">\(\mu\)</span></p>
-<p><strong>statistic</strong>:</p>
-<ul>
-<li>numerical summary computed from sample data</li>
-<li>value can vary from sample to sample</li>
-<li>serves as an estimate of the corresponding parameter</li>
-</ul>
-<p>Example: sample mean gene expression under a condition <span class="math inline">\(\bar{\mu}\)</span></p>
-<p>Note:</p>
-<ul>
-<li>never directly observe parameters</li>
-<li>observe statistics <span class="math inline">\(\rightarrow\)</span> use probability theory to understand how those statistics relate to the underlying parameters</li>
-</ul>
-</div>
-</section>
-<section class="slide level2">
-
-<h3 id="example-biomedical-example-sampling-variability-in-population-genomics">Example: Biomedical Example: Sampling Variability in Population Genomics</h3>
-<div style="font-size:0.7em">
-<p><strong>Background: What is allele frequency?</strong></p>
-<ul>
-<li><strong>allele frequency</strong>: proportion of all gene copies at a specific genomic locus within a defined population that carry a particular allele</li>
-<li><strong>allele frequency</strong>: reflects how common that genetic variant is in that population</li>
-</ul>
-<p>Allele frequency is therefore calculated as:</p>
-<p><span class="math display">\[
-\text{Allele frequency} =
-\frac{\text{Number of occurrences of a given allele}}
-{\text{Total number of alleles at that locus in the population}}
-\]</span></p>
-</div>
-</section>
-<section class="slide level2">
-
-<h3 id="example-biomedical-example-sampling-variability-in-population-genomics-1">Example: Biomedical Example: Sampling Variability in Population Genomics</h3>
-<div style="font-size:0.7em">
-<p><strong>Population parameter</strong></p>
-<ul>
-<li>true allele frequency of a pathogenic variant among all humans</li>
-<li>represents a biological property of the population</li>
-<li>fixed but unknown because sequencing every human is infeasible</li>
-</ul>
-<p><strong>Statistic</strong></p>
-<ul>
-<li>observed allele frequency calculated from a sample dataset [i.e.:gnomAD ]</li>
-<li>population databases [i.e.: gnomAD] are large but finite samples</li>
-<li>serves as an estimate of the population parameter</li>
-<li>value depends on which individuals were included in the sample</li>
-</ul>
-</div>
-</section>
-<section class="slide level2">
-
-<h3 id="example-biomedical-example-sampling-variability-in-population-genomics-2">Example: Biomedical Example: Sampling Variability in Population Genomics</h3>
-<div style="font-size:0.7em">
-<p><strong>Background</strong></p>
-<ul>
-<li>different sequencing cohorts produce slightly different estimates of allele frequency</li>
-<li>population databases therefore provide statistical estimates of population genetic parameters rather than exact values</li>
-</ul>
-<p><strong>Central question</strong>: Why do allele frequency estimates vary across sequencing datasets?</p>
-<p><strong>Approach</strong>: Simulate repeated sequencing studies from a population with a fixed allele frequency</p>
-</div>
-</section>
-<section class="slide level2">
-
-<h3 id="example-biomedical-example-sampling-variability-in-population-genomics-3">Example: Biomedical Example: Sampling Variability in Population Genomics</h3>
-<div style="font-size:0.3em">
-<p><strong>Conclusions</strong></p>
-<ul>
-<li>observed allele frequencies fluctuate across samples, illustrating sampling variability</li>
-<li>figure shows: sampling variability of allele frequency estimates across repeated sequencing studies</li>
-<li>histogram shows : repeated sequencing studies yield slightly different allele frequency estimates that cluster around the true population frequency <span class="math inline">\(\rightarrow\)</span> sampling variability</li>
-<li>red line [population parameter]: actual underlying allele frequency</li>
-<li>even when the true allele frequency is fixed, different samples produce slightly different estimates</li>
-</ul>
-<p><strong>Reasons for differences</strong>:</p>
-<ul>
-<li>each sequencing cohort contains a different set of chromosomes</li>
-<li>random sampling causes small differences in observed variant counts</li>
+<li>a study observes <em>n</em> patients drawn from this population<br>
+</li>
+<li>each patient outcome is a Bernoulli trial (mutation present or absent)<br>
+</li>
+<li>the table summarizes observed counts and proportions across sampled patients</li>
 </ul>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a>table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  mutation     n  prop
+     &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
+1        0   168  0.84
+2        1    32  0.16</code></pre>
+</div>
+</div>
+<p>Interpretation:</p>
+<p>mutation = 0 → 162 patients do not carry the mutation [81% of the sample]</p>
+<p>mutation = 1 → 38 patients carry the mutation [19% of the sample]</p>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="categorical-random-variables">Categorical random variables</h3>
+<div style="font-size:0.6em">
+<p>Categorical outcomes represent membership in one of several classes</p>
+<p>Examples:</p>
+<ul>
+<li>tumor subtype [LumA, LumB, HER2, Basal]</li>
+<li>response category [CR/PR/NR]</li>
+<li>lineage assignment in single-cell data</li>
+</ul>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="code-exampleclinical-trial-patient-responses">Code example:Clinical Trial Patient Responses</h3>
+<div style="font-size:0.6em">
+<p><strong>Biomedical question</strong></p>
+<p>In a clinical trial evaluating a new therapy, patients are classified into one of three mutually exclusive response categories:</p>
+<ul>
+<li><strong>CR</strong> — complete response<br>
+</li>
+<li><strong>PR</strong> — partial response<br>
+</li>
+<li><strong>NR</strong> — no response</li>
+</ul>
+<p><strong>Population perspective</strong></p>
+<p>Across all eligible patients, treatment response follows a categorical probability distribution with unknown probabilities:</p>
+<p><span class="math display">\[
+P(Y=\text{CR}) = p_{CR}, \quad
+P(Y=\text{PR}) = p_{PR}, \quad
+P(Y=\text{NR}) = p_{NR}
+\]</span></p>
+<ul>
+<li>probabilities describe the <strong>population response distribution</strong></li>
+</ul>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="code-exampleclinical-trial-patient-responses-1">Code example:Clinical Trial Patient Responses</h3>
+<div style="font-size:0.5em">
+<p><strong>Sampling and estimation</strong></p>
+<ul>
+<li>a study observes (n) patients drawn from this population<br>
+</li>
+<li>each patient outcome represents one draw from the categorical distribution<br>
+</li>
+<li>sample counts and proportions estimate the underlying response probabilities</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a>n <span class="ot">&lt;-</span> <span class="dv">300</span></span>
+<span id="cb3-2"><a href=""></a>levels_resp <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"CR"</span>, <span class="st">"PR"</span>, <span class="st">"NR"</span>)</span>
+<span id="cb3-3"><a href=""></a>probs_resp  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.20</span>, <span class="fl">0.50</span>, <span class="fl">0.30</span>)</span>
+<span id="cb3-4"><a href=""></a></span>
+<span id="cb3-5"><a href=""></a>response <span class="ot">&lt;-</span> <span class="fu">sample</span>(levels_resp, <span class="at">size =</span> n, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> probs_resp)</span>
+<span id="cb3-6"><a href=""></a></span>
+<span id="cb3-7"><a href=""></a>tab <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">response =</span> <span class="fu">factor</span>(response, <span class="at">levels =</span> levels_resp)) <span class="sc">|&gt;</span></span>
+<span id="cb3-8"><a href=""></a>  <span class="fu">count</span>(response) <span class="sc">|&gt;</span></span>
+<span id="cb3-9"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">prop =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n))</span>
+<span id="cb3-10"><a href=""></a></span>
+<span id="cb3-11"><a href=""></a>tab</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  response     n  prop
+  &lt;fct&gt;    &lt;int&gt; &lt;dbl&gt;
+1 CR          57 0.19 
+2 PR         145 0.483
+3 NR          98 0.327</code></pre>
+</div>
+</div>
+<p>Interpretatioin:</p>
+<p>For each response category:</p>
+<ul>
+<li><strong>CR, PR, NR</strong> : possible treatment outcomes<br>
+</li>
+<li><strong>n</strong> : number of patients observed in that category [sample counts]</li>
+<li><strong>prop</strong> : proportion of patients in that category [sample probabilities]</li>
+</ul>
+<p>Treatment response outcomes among the 300 sampled patients:</p>
+<p>Complete Response[CR]: 68 patients representing 22.7% of the sample</p>
+<p>Partial Response [PR]: 155 patients representing 51.7% of the sample</p>
+<p>No Response [NR]: 77 patients representing 25.7% of the sample</p>
+</div>
+</section>
+<section id="continuous-random-variables" class="slide level2">
+<h2>Continuous random variables</h2>
+<ul>
+<li>continuous outcomes arise from measurements on a scale</li>
+<li>modeled with densities</li>
+<li>associated models: linear regression and survival modeling</li>
+</ul>
+<p>Examples:</p>
+<ul>
+<li>biomarker concentration</li>
+<li>tumor size</li>
+<li>expression level (after suitable transformation)</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="code-example-continuous-biomarker">Code example: Continuous Biomarker</h3>
+<div style="font-size:0.6em">
+<p><strong>Biomedical context</strong></p>
+<ul>
+<li><p>circulating tumor biomarker concentrations vary continuously across patients due to biological heterogeneity and measurement variability<br>
+</p></li>
+<li><p>measurements arise from a population distribution characterized by a mean level and variability</p></li>
+<li><p><code>rnorm()</code>: simulates draws from a normal population distribution</p></li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>biomarker <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>each observation represents a sampled patient measurement</li>
+<li>histogram visualizes the empirical distribution observed in the sample</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a>plot_cont</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="test_2_082025_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></p>
+<p><img data-src="test_2_082025_files/figure-revealjs/unnamed-chunk-3-1.png" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="code-example-continuous-biomarker-1">Code example: Continuous Biomarker</h3>
+<div style="font-size:0.6em">
+<p>Explanation:</p>
+<ul>
+<li><code>rnorm()</code> simulates a continuous variable under a normal model</li>
+<li>biomarker concentration is the continuous random variable</li>
+<li>histogram shows the distribution of observed values in the sample</li>
+<li>each simulated value represents one patient biomarker measurement drawn from the population distribution</li>
+<li>histogram shows how these measurements are distributed across the cohort</li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a>plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>$breaks
- [1] 0.0065 0.0070 0.0075 0.0080 0.0085 0.0090 0.0095 0.0100 0.0105 0.0110
-[11] 0.0115 0.0120 0.0125
-
-$counts
- [1]  1  0  2  1  5  6  8 13  6  1  5  2
-
-$density
- [1]  40   0  80  40 200 240 320 520 240  40 200  80
-
-$mids
- [1] 0.00675 0.00725 0.00775 0.00825 0.00875 0.00925 0.00975 0.01025 0.01075
-[10] 0.01125 0.01175 0.01225
-
-$xname
-[1] "estimates"
-
-$equidist
-[1] TRUE
-
-attr(,"class")
-[1] "histogram"</code></pre>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a>plot_cont</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="test_2_082025_files/figure-revealjs/unnamed-chunk-4-1.png" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
 </section>
 <section class="slide level2">
 
-<h3 id="conceptual-model-of-statistical-inference">Conceptual Model of Statistical Inference</h3>
+<h3 id="population-distributions-as-models-of-biological-variation">Population Distributions as Models of Biological Variation</h3>
 <div style="font-size:0.7em">
 <ul>
-<li><p>statistical inference is a process that uses observed data to learn about unknown features of a population</p></li>
-<li><p>translates sample-derived summaries into probabilistic statements about population parameters while accounting for sampling variability</p></li>
+<li><p><code>population distribution</code>: describes how outcomes vary across all individuals in a population</p></li>
+<li><p>distributions represent the probabilistic structure of the population</p></li>
+<li><p>probability distributions specify:</p>
+<ul>
+<li>the possible values of a random variable<br>
+</li>
+<li>the probability associated with each value</li>
+</ul></li>
 </ul>
-<p>Workflow:</p>
-<p>Population (unknown parameter) <span class="math inline">\(\rightarrow\)</span> Random sampling <span class="math inline">\(\rightarrow\)</span> Observed sample <span class="math inline">\(\rightarrow\)</span> Compute statistic <span class="math inline">\(\rightarrow\)</span> Estimate population parameter <span class="math inline">\(\rightarrow\)</span> Quantify uncertainty</p>
-</div>
-</section>
-<section class="slide level2">
-
-<h3 id="concept-review">Concept Review</h3>
-<div style="font-size:0.7em">
+<p>In a biomedical context, distributions characterize:</p>
 <ul>
-<li><strong>population</strong>:
-<ul>
-<li>population contains the biological or clinical quantity of interest — such as a response probability, allele frequency, or survival rate</li>
-<li>quantity is a parameter <span class="math inline">\(\rightarrow\)</span> fixed but unknown</li>
-</ul></li>
-<li><strong>random sampling</strong>:
-<ul>
-<li>subset of units [patients, genomes, cells] selected from the population</li>
-<li>sampling introduces randomness <span class="math inline">\(\rightarrow\)</span> only some population members are observed</li>
-</ul></li>
-<li><strong>observed sample</strong>: collected dataset represents one realization from many possible samples that could have been obtained</li>
+<li><p>variability across patients<br>
+</p></li>
+<li><p>heterogeneity across cells<br>
+</p></li>
+<li><p>variation across populations</p></li>
+<li><p>statistical inference aims to learn these distributions from sampled observations</p></li>
 </ul>
 </div>
 </section>
 <section class="slide level2">
 
-<h3 id="concept-review-1">Concept Review</h3>
+<h3 id="probability-distributions">Probability Distributions</h3>
+<div style="font-size:0.7em">
+<p>A probability distribution specifies:</p>
+<ul>
+<li>represents the population and describe population behavior</li>
+<li>probability of each possible value of a random variable</li>
+<li>describes the behavior of the population</li>
+</ul>
+<p>Examples:</p>
+<ul>
+<li>distribution of treatment response</li>
+<li>distribution of biomarker levels</li>
+<li>distribution of gene expression</li>
+</ul>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="why-distributions-are-fundamental-to-statistics">Why Distributions Are Fundamental to Statistics</h3>
+<div style="font-size:0.6em">
+<ul>
+<li><p>statistical models assume observed data arise from an underlying probability distribution</p></li>
+<li><p>probability distributions: provide the mathematical representation of biological variability across individuals, cells, and populations</p></li>
+<li><p>distribution defines:</p>
+<ul>
+<li>possible outcomes<br>
+</li>
+<li>how frequently those outcomes occur<br>
+</li>
+<li>variability expected across individuals</li>
+</ul></li>
+</ul>
+<p><strong>Examples of outcome distributions in biomedical models</strong></p>
+<ul>
+<li><p><strong>logistic regression</strong>: assumes a <strong>Bernoulli distribution</strong> for binary outcomes [i.e.: response vs no response, mutation present vs absent]</p></li>
+<li><p><strong>multinomial regression</strong>: assumes a <strong>categorical/multinomial distribution</strong><br>
+[i.e.: complete, partial, non-response categories, tumor subtype]</p></li>
+<li><p><strong>survival analysis</strong>: assumes a <strong>time-to-event distribution</strong><br>
+[i.e.: exponential, Weibull, or Cox hazard-based models for survival time]</p></li>
+<li><p><strong>variant frequency estimation</strong>: commonly assumes <strong>binomial or multinomial distributions</strong><br>
+[i.e.: allele counts, genotype counts in populations]</p></li>
+</ul>
+</div>
+</section>
+<section id="probability-distributions-describe-population-behavior" class="slide level2">
+<h2>Probability Distributions Describe Population Behavior</h2>
 <div style="font-size:0.7em">
 <ul>
-<li><p><strong>compute statistic</strong>:statistic [i.e.: proportion, regression coefficient, hazard ratio] summarizes information in the sample</p></li>
-<li><p><strong>estimate population parameter</strong>:</p>
+<li><p><strong>population distribution</strong>: describes how outcomes vary across all individuals or units in a population</p></li>
+<li><p>probability distribution specifies:</p>
 <ul>
-<li>statistic serves as an estimate of the population parameter</li>
-<li>evidence-based approximation of the underlying biological quantity</li>
+<li>the set of possible values a random variable can take<br>
+</li>
+<li>the probability associated with each value (or range of values)</li>
 </ul></li>
-<li><p><strong>quantify uncertainty</strong>:</p>
+<li><p>distibutions represent the probability structure of the population</p></li>
+</ul>
+<p>Example Interpretation:</p>
 <ul>
-<li>statistic depends on the sample, it is subject to sampling variability</li>
-<li>statistical inference therefore quantifies uncertainty using tools such as standard errors, confidence intervals, likelihood, or posterior distributions</li>
-</ul></li>
+<li>study first collects individual observations</li>
+<li>samples provide partial views of the population</li>
+<li>distribution describes long-run population behavior</li>
+</ul>
+<p>Distributions vs Individual Observations</p>
+<ul>
+<li>individual observation: one patient tumor size</li>
+<li>distribution: all possible tumor sizes and their probabilities</li>
+</ul>
+</div>
+</section>
+<section id="probability-distributions-describe-population-behavior-1" class="slide level2">
+<h2>Probability Distributions Describe Population Behavior</h2>
+<div style="font-size:0.7em">
+<p><strong>Biomedical examples</strong></p>
+<ul>
+<li>probability of treatment response categories [i.e.: complete, partial, nonresponse]<br>
+</li>
+<li>distribution of biomarker concentrations across patients<br>
+</li>
+<li>distribution of gene expression levels across cells<br>
+</li>
+<li>prevalence distribution of pathogenic variants in a population</li>
+</ul>
+<p><strong>Relevance in biomedical research</strong></p>
+<p>Population distributions can be used to:</p>
+<ul>
+<li><p>quantify biological variability across individuals and systems<br>
+</p></li>
+<li><p>define parameters of interest [means, proportions, rates, risks]</p></li>
+<li><p>determine expected sampling variability</p></li>
+<li><p>statistical approaches aim to learn the population distribution from sample data in order to make inferences about samples</p></li>
+</ul>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="summary">Summary</h3>
+<div style="font-size:0.7em">
+<p>Key concepts introduced:</p>
+<ul>
+<li><p>probability quantifies biological uncertainty and data generation<br>
+</p></li>
+<li><p>random variables represent biomedical outcomes numerically<br>
+</p></li>
+<li><p>probability distributions describe population behavior and variability<br>
+</p></li>
+<li><p>sampling produces realizations from population distributions<br>
+</p></li>
+<li><p>statistics summarize sampled outcomes<br>
+</p></li>
+<li><p>inference uses samples to learn about underlying distributions</p></li>
+<li><p>concepts collectively establish the probabilistic foundation for regression, survival analysis, and biomedical data science</p></li>
 </ul>
 </div>
 </section>
