@@ -62,7 +62,7 @@ Probability models allow researchers to:
 </div>
 ---
 
-## Probability: Defnition
+## Probability: Definition
 
 <div style="font-size:0.7em">
 
@@ -368,6 +368,29 @@ $$
 - sample counts and proportions estimate the underlying response probabilities  
 
 ```{r, echo=TRUE}
+#| label: l2-cat-sim99
+n <- 300
+levels_resp <- c("CR", "PR", "NR")
+probs_resp  <- c(0.20, 0.50, 0.30)
+
+response <- sample(levels_resp, size = n, replace = TRUE, prob = probs_resp)
+
+tab <- tibble(response = factor(response, levels = levels_resp)) |>
+  count(response) |>
+  mutate(prop = n / sum(n))
+
+tab
+```
+
+
+</div>
+---
+
+### Code example:Clinical Trial Patient Responses
+
+<div style="font-size:0.5em">
+
+```{r, echo=TRUE}
 #| label: l2-cat-sim
 n <- 300
 levels_resp <- c("CR", "PR", "NR")
@@ -382,7 +405,7 @@ tab <- tibble(response = factor(response, levels = levels_resp)) |>
 tab
 ```
 
-Interpretatioin:
+Interpretation:
 
 For each response category:
 
@@ -571,7 +594,7 @@ Examples:
 
 ## Probability Distributions Describe Population Behavior
 
-<div style="font-size:0.7em">
+<div style="font-size:0.5em">
 
 - **population distribution**: describes how outcomes vary across all individuals or units in a population
 

@@ -251,8 +251,8 @@
 </ul>
 </div>
 </section>
-<section id="probability-defnition" class="slide level2">
-<h2>Probability: Defnition</h2>
+<section id="probability-definition" class="slide level2">
+<h2>Probability: Definition</h2>
 <div style="font-size:0.7em">
 <ul>
 <li><p>a measure of how likely an event is to occur<br>
@@ -472,8 +472,8 @@ Y_i \sim \text{Bernoulli}(p)
 <pre><code># A tibble: 2 × 3
   mutation     n  prop
      &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
-1        0   168  0.84
-2        1    32  0.16</code></pre>
+1        0   161 0.805
+2        1    39 0.195</code></pre>
 </div>
 </div>
 <p>Interpretation:</p>
@@ -547,12 +547,39 @@ P(Y=\text{NR}) = p_{NR}
 <pre><code># A tibble: 3 × 3
   response     n  prop
   &lt;fct&gt;    &lt;int&gt; &lt;dbl&gt;
-1 CR          57 0.19 
-2 PR         145 0.483
-3 NR          98 0.327</code></pre>
+1 CR          45  0.15
+2 PR         171  0.57
+3 NR          84  0.28</code></pre>
 </div>
 </div>
-<p>Interpretatioin:</p>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="code-exampleclinical-trial-patient-responses-2">Code example:Clinical Trial Patient Responses</h3>
+<div style="font-size:0.5em">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>n <span class="ot">&lt;-</span> <span class="dv">300</span></span>
+<span id="cb5-2"><a href=""></a>levels_resp <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"CR"</span>, <span class="st">"PR"</span>, <span class="st">"NR"</span>)</span>
+<span id="cb5-3"><a href=""></a>probs_resp  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.20</span>, <span class="fl">0.50</span>, <span class="fl">0.30</span>)</span>
+<span id="cb5-4"><a href=""></a></span>
+<span id="cb5-5"><a href=""></a>response <span class="ot">&lt;-</span> <span class="fu">sample</span>(levels_resp, <span class="at">size =</span> n, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> probs_resp)</span>
+<span id="cb5-6"><a href=""></a></span>
+<span id="cb5-7"><a href=""></a>tab <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">response =</span> <span class="fu">factor</span>(response, <span class="at">levels =</span> levels_resp)) <span class="sc">|&gt;</span></span>
+<span id="cb5-8"><a href=""></a>  <span class="fu">count</span>(response) <span class="sc">|&gt;</span></span>
+<span id="cb5-9"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">prop =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n))</span>
+<span id="cb5-10"><a href=""></a></span>
+<span id="cb5-11"><a href=""></a>tab</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  response     n  prop
+  &lt;fct&gt;    &lt;int&gt; &lt;dbl&gt;
+1 CR          60  0.2 
+2 PR         147  0.49
+3 NR          93  0.31</code></pre>
+</div>
+</div>
+<p>Interpretation:</p>
 <p>For each response category:</p>
 <ul>
 <li><strong>CR, PR, NR</strong> : possible treatment outcomes<br>
@@ -591,13 +618,13 @@ P(Y=\text{NR}) = p_{NR}
 <li><p>measurements arise from a population distribution characterized by a mean level and variability</p></li>
 <li><p><code>rnorm()</code>: simulates draws from a normal population distribution</p></li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>biomarker <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a>biomarker <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>each observation represents a sampled patient measurement</li>
 <li>histogram visualizes the empirical distribution observed in the sample</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a>plot_cont</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a>plot_cont</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure>
@@ -621,7 +648,7 @@ P(Y=\text{NR}) = p_{NR}
 <li>histogram shows how these measurements are distributed across the cohort</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a>plot_cont</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a>plot_cont</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure>
@@ -705,7 +732,7 @@ P(Y=\text{NR}) = p_{NR}
 </section>
 <section id="probability-distributions-describe-population-behavior" class="slide level2">
 <h2>Probability Distributions Describe Population Behavior</h2>
-<div style="font-size:0.7em">
+<div style="font-size:0.5em">
 <ul>
 <li><p><strong>population distribution</strong>: describes how outcomes vary across all individuals or units in a population</p></li>
 <li><p>probability distribution specifies:</p>
