@@ -253,7 +253,7 @@
 </section>
 <section id="probability-definition" class="slide level2">
 <h2>Probability: Definition</h2>
-<div style="font-size:0.7em">
+<div style="font-size:0.5em">
 <ul>
 <li><p>a measure of how likely an event is to occur<br>
 </p></li>
@@ -422,7 +422,7 @@ Y = \text{tumor size}
 <section class="slide level2">
 
 <h3 id="code-example-simulate-a-binary-mutation-indicator">Code example: simulate a binary mutation indicator</h3>
-<div style="font-size:0.7em">
+<div style="font-size:0.6em">
 <p><strong>Biomedical question</strong></p>
 <p>What proportion of patients in a population carry a pathogenic mutation in a gene of interest?</p>
 <p><strong>Population perspective</strong></p>
@@ -450,7 +450,7 @@ Y_i \sim \text{Bernoulli}(p)
 <section class="slide level2">
 
 <h3 id="code-example-binary-mutation-indicator">Code example: Binary Mutation Indicator</h3>
-<div style="font-size:0.6em">
+<div style="font-size:0.5em">
 <p>Explanation:</p>
 <ul>
 <li><code>rbinom(n, 1, p)</code> generates (n) independent Bernoulli outcomes<br>
@@ -472,8 +472,8 @@ Y_i \sim \text{Bernoulli}(p)
 <pre><code># A tibble: 2 × 3
   mutation     n  prop
      &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
-1        0   161 0.805
-2        1    39 0.195</code></pre>
+1        0   168  0.84
+2        1    32  0.16</code></pre>
 </div>
 </div>
 <p>Interpretation:</p>
@@ -547,9 +547,9 @@ P(Y=\text{NR}) = p_{NR}
 <pre><code># A tibble: 3 × 3
   response     n  prop
   &lt;fct&gt;    &lt;int&gt; &lt;dbl&gt;
-1 CR          45  0.15
-2 PR         171  0.57
-3 NR          84  0.28</code></pre>
+1 CR          73 0.243
+2 PR         132 0.44 
+3 NR          95 0.317</code></pre>
 </div>
 </div>
 </div>
@@ -574,9 +574,9 @@ P(Y=\text{NR}) = p_{NR}
 <pre><code># A tibble: 3 × 3
   response     n  prop
   &lt;fct&gt;    &lt;int&gt; &lt;dbl&gt;
-1 CR          60  0.2 
-2 PR         147  0.49
-3 NR          93  0.31</code></pre>
+1 CR          55 0.183
+2 PR         148 0.493
+3 NR          97 0.323</code></pre>
 </div>
 </div>
 <p>Interpretation:</p>
@@ -588,9 +588,9 @@ P(Y=\text{NR}) = p_{NR}
 <li><strong>prop</strong> : proportion of patients in that category [sample probabilities]</li>
 </ul>
 <p>Treatment response outcomes among the 300 sampled patients:</p>
-<p>Complete Response[CR]: 68 patients representing 22.7% of the sample</p>
-<p>Partial Response [PR]: 155 patients representing 51.7% of the sample</p>
-<p>No Response [NR]: 77 patients representing 25.7% of the sample</p>
+<p>Complete Response[CR]: 55 patients representing 18.3% of the sample</p>
+<p>Partial Response [PR]: 160 patients representing 53.3% of the sample</p>
+<p>No Response [NR]: 85 patients representing 28.3% of the sample</p>
 </div>
 </section>
 <section id="continuous-random-variables" class="slide level2">
@@ -623,16 +623,6 @@ P(Y=\text{NR}) = p_{NR}
 <li>each observation represents a sampled patient measurement</li>
 <li>histogram visualizes the empirical distribution observed in the sample</li>
 </ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a>plot_cont</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="test_2_082025_files/figure-revealjs/unnamed-chunk-3-1.png" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
 </div>
 </section>
 <section class="slide level2">
@@ -648,11 +638,11 @@ P(Y=\text{NR}) = p_{NR}
 <li>histogram shows how these measurements are distributed across the cohort</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a>plot_cont</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a>plot_cont</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="test_2_082025_files/figure-revealjs/unnamed-chunk-4-1.png" width="672"></p>
+<p><img data-src="test_2_082025_files/figure-revealjs/unnamed-chunk-3-1.png" width="384"></p>
 </figure>
 </div>
 </div>
@@ -756,9 +746,10 @@ P(Y=\text{NR}) = p_{NR}
 </ul>
 </div>
 </section>
-<section id="probability-distributions-describe-population-behavior-1" class="slide level2">
-<h2>Probability Distributions Describe Population Behavior</h2>
-<div style="font-size:0.7em">
+<section class="slide level2">
+
+<h3 id="probability-distributions-describe-population-behavior-1">Probability Distributions Describe Population Behavior</h3>
+<div style="font-size:0.6em">
 <p><strong>Biomedical examples</strong></p>
 <ul>
 <li>probability of treatment response categories [i.e.: complete, partial, nonresponse]<br>

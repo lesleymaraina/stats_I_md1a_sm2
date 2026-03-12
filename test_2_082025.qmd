@@ -64,7 +64,7 @@ Probability models allow researchers to:
 
 ## Probability: Definition
 
-<div style="font-size:0.7em">
+<div style="font-size:0.5em">
 
 
 - a measure of how likely an event is to occur  
@@ -249,7 +249,7 @@ Examples:
 ---
 
 ### Code example: simulate a binary mutation indicator
-<div style="font-size:0.7em">
+<div style="font-size:0.6em">
 
 **Biomedical question**
 
@@ -277,7 +277,7 @@ $$
 ---
 
 ### Code example: Binary Mutation Indicator
-<div style="font-size:0.6em">
+<div style="font-size:0.5em">
 
 Explanation:
 
@@ -415,11 +415,11 @@ For each response category:
 
 Treatment response outcomes among the 300 sampled patients:
 
-Complete Response[CR]: 68 patients representing 22.7% of the sample
+Complete Response[CR]: 55 patients representing 18.3% of the sample
 
-Partial Response [PR]: 155 patients representing 51.7% of the sample
+Partial Response [PR]: 160 patients representing 53.3% of the sample
 
-No Response [NR]: 77 patients representing 25.7% of the sample
+No Response [NR]: 85 patients representing 28.3% of the sample
 
 </div>
 ---
@@ -473,14 +473,6 @@ plot_cont <- ggplot(tibble(biomarker), aes(biomarker)) +
 ```
 
 
-
-
-```{r}
-#| fig-width: 7
-#| fig-height: 4
-plot_cont
-```
-
 </div>
 ---
 
@@ -497,23 +489,10 @@ Explanation:
 - histogram shows how these measurements are distributed across the cohort
 
 
-```{r, echo=FALSE}
-#| label: l2-cont-sim
-n <- 400
-mu <- 10
-sigma <- 2
-
-biomarker <- rnorm(n, mean = mu, sd = sigma)
-
-plot_cont <- ggplot(tibble(biomarker), aes(biomarker)) +
-  geom_histogram(bins = 35) +
-  labs(x = "Biomarker", y = "Count",
-       title = "Simulated biomarker measurements")
-```
 
 ```{r}
-#| fig-width: 7
-#| fig-height: 4
+#| fig-width: 4
+#| fig-height: 3
 plot_cont
 ```
 
@@ -621,9 +600,9 @@ Distributions vs Individual Observations
 
 ---
 
-## Probability Distributions Describe Population Behavior
+### Probability Distributions Describe Population Behavior
 
-<div style="font-size:0.7em">
+<div style="font-size:0.6em">
 
 
 **Biomedical examples**
